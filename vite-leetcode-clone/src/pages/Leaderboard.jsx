@@ -1,37 +1,76 @@
-
-import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
 
 const mockUsers = [
-  { username: 'alice', solved: 120 },
-  { username: 'bob', solved: 110 },
-  { username: 'charlie', solved: 95 },
-  { username: 'diana', solved: 90 }
-]
+  { username: "alice", solved: 120, rank: "Майстер", avatar: "👑" },
+  { username: "bob", solved: 110, rank: "Експерт", avatar: "🎯" },
+  { username: "charlie", solved: 95, rank: "Професіонал", avatar: "⭐" },
+  { username: "diana", solved: 90, rank: "Професіонал", avatar: "⭐" },
+  { username: "eric", solved: 85, rank: "Досвідчений", avatar: "🎮" },
+  { username: "frank", solved: 80, rank: "Досвідчений", avatar: "🎮" },
+  { username: "grace", solved: 75, rank: "Середній", avatar: "🎲" },
+  { username: "hannah", solved: 72, rank: "Середній", avatar: "🎲" },
+];
 
 export default function Leaderboard() {
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold text-blue-600 mb-8 text-center">🏆 Рейтинг учасників</h1>
-      <div className="bg-white shadow-lg rounded-xl overflow-hidden border">
-        <table className="w-full text-left">
-          <thead className="bg-gray-100 text-sm uppercase text-gray-600">
-            <tr>
-              <th className="px-6 py-4">Місце</th>
-              <th className="px-6 py-4">Користувач</th>
-              <th className="px-6 py-4">Задачі</th>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="max-w-4xl mx-auto py-8 px-4"
+    >
+      <motion.h1
+        className="text-4xl font-bold text-gradient mb-8 text-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        🏆 Рейтинг Учасників
+      </motion.h1>
+
+      <motion.div
+        className="content-glass overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <table className="w-full">
+          <thead className="border-b border-white/10">
+            <tr className="text-sm text-gray-400">
+              <th className="px-6 py-4 text-left">Місце</th>
+              <th className="px-6 py-4 text-left">Користувач</th>
+              <th className="px-6 py-4 text-left">Ранг</th>
+              <th className="px-6 py-4 text-left">Задачі</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-white/10">
             {mockUsers.map((user, index) => (
-              <tr key={user.username} className="hover:bg-gray-50 transition">
-                <td className="px-6 py-4 font-semibold">{index + 1}</td>
-                <td className="px-6 py-4">{user.username}</td>
-                <td className="px-6 py-4 text-gray-500">{user.solved}</td>
-              </tr>
+              <motion.tr
+                key={user.username}
+                className="hover:bg-white/5 transition"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * index }}
+              >
+                <td className="px-6 py-4">
+                  <span className="text-gradient font-bold">#{index + 1}</span>
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">{user.avatar}</span>
+                    <span className="font-medium text-gray-200">
+                      {user.username}
+                    </span>
+                  </div>
+                </td>
+                <td className="px-6 py-4">
+                  <span className="text-gradient">{user.rank}</span>
+                </td>
+                <td className="px-6 py-4 text-gray-400">{user.solved}</td>
+              </motion.tr>
             ))}
           </tbody>
         </table>
-      </div>
-    </div>
-  )
+      </motion.div>
+    </motion.div>
+  );
 }

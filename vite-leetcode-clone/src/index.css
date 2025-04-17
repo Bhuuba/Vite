@@ -1,8 +1,70 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  .bg-gradient-animated {
+    @apply fixed inset-0 opacity-30 pointer-events-none;
+    background: linear-gradient(
+      -45deg,
+      theme("colors.vt-purple"),
+      theme("colors.vt-blue"),
+      theme("colors.vt-cyan")
+    );
+    background-size: 400% 400%;
+    animation: gradient-xy 15s ease infinite;
+    z-index: -1;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-vt-purple via-vt-blue to-vt-cyan animate-gradient-x;
+  }
+
+  .content-glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-xl;
+  }
+
+  .hover-card {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/5;
+  }
+}
+
+.bg-shapes div {
+  @apply absolute rounded-full bg-white/5 backdrop-blur-sm;
+  animation: float 20s infinite;
+}
+
+.bg-shapes div:nth-child(1) {
+  @apply w-72 h-72 -left-36 -top-36;
+  animation-delay: -5s;
+}
+
+.bg-shapes div:nth-child(2) {
+  @apply w-48 h-48 -right-24 top-1/3;
+  animation-delay: -10s;
+}
+
+.bg-shapes div:nth-child(3) {
+  @apply w-36 h-36 left-1/4 -bottom-20;
+  animation-delay: -15s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-100px) rotate(180deg);
+  }
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  @apply bg-dark-bg text-gray-100 min-h-screen overflow-x-hidden;
 }

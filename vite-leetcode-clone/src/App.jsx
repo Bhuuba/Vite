@@ -12,16 +12,26 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 text-gray-900">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/challenges" element={<Challenges />} />
-          <Route path="/challenges/:id" element={<ChallengeDetail />} />
-        </Routes>
-        <Footer />
+      <div className="relative min-h-screen">
+        <div className="bg-gradient-animated" />
+        <div className="bg-shapes">
+          <div className="shape" />
+          <div className="shape" />
+          <div className="shape" />
+        </div>
+        <div className="relative z-10">
+          <Header />
+          <main className="content-glass mx-4 my-6 rounded-xl max-w-7xl md:mx-auto p-6">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/challenges" element={<Challenges />} />
+              <Route path="/challenges/:id" element={<ChallengeDetail />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </div>
     </Router>
   );
